@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Entry Form</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #f4f6f9;
+        }
+
+        /* HEADER */
+        .header {
+            display: grid;
+            grid-template-columns: 200px 1fr 350px;
+            align-items: center;
+            background: #eef1f1fe;
+            color: rgb(9, 61, 251);
+            padding: 10px 20px;
+        }
+
+        .logo img {
+            height: 60px;
+        }
+
+        .welcome {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .header-center {
+            display: flex;
+            justify-content: flex-end;
+            gap: 25px;
+        }
+
+        .header-center a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: rgb(9, 61, 251);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* FORM */
+        .container {
+            padding-top: 50px;
+        }
+
+        .form-box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 950px;
+            margin: auto;
+        }
+
+        h2 {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            row-gap: 14px;
+            column-gap: 35px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        /* SAME SIZE FOR ALL */
+        input, textarea, button {
+            padding: 8px;
+            height: 35px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        /* BOTTOM ROW */
+        .bottom-row {
+            grid-column: span 4;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 35px;
+            margin-top: 15px;
+        }
+
+        .bottom-row .field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* BUTTON STYLE */
+        .bottom-row button {
+            background: green;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+        }
+
+        .bottom-row button:hover {
+            background: darkgreen;
+        }
+
+        /* SUCCESS */
+        .success {
+            text-align: center;
+            color: green;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+
+    <div class="logo">
+        <img src="/static/logo.png">
+    </div>
+
+    <div class="welcome">
+        Welcome {{session['user']}}
+    </div>
+
+    <div class="header-center">
+        <a href="/dashboard"><i class="fa fa-home"></i> Dashboard</a>
+        <a href="/change_password"><i class="fa fa-key"></i> Change Password</a>
+        <a href="/logout"><i class="fa fa-sign-out-alt"></i> Logout</a>
+    </div>
+
+</div>
+
+<!-- FORM -->
+<div class="container">
+<div class="form-box">
+
+<h2>Data Entry Form</h2>
+
+{% if success %}
+<div class="success">Data Saved Successfully ✅</div>
+{% endif %}
+
+<form method="POST">
+
+<div class="grid">
+
+    <div class="field">
+        <label>WorkBook</label>
+        <input value="Training" readonly>
+    </div>
+
+    <div class="field">
+        <label>Start Date</label>
+        <input type="date" name="start_date" id="startDate" required>
+    </div>
+
+    <div class="field">
+        <label>End Date</label>
+        <input type="date" name="end_date" id="endDate" required>
+    </div>
+
+    <div class="field">
+        <label>Form No</label>
+        <input value="{{ form_no }}" readonly>
+    </div>
+
+    <!-- ROW 2 -->
+    <div class="field"><label>Brand</label><input name="brand" required></div>
+    <div class="field"><label>M_Code</label><input name="manufacturer" required></div>
+    <div class="field"><label>M_No</label><input name="model" required></div>
+    <div class="field"><label>M_Description</label><input name="model_desc" required></div>
+
+    <!-- ROW 3 -->
+    <div class="field"><label>Commander</label><input name="commander" required></div>
+    <div class="field"><label>Destination</label><input name="destination" required></div>
+    <div class="field"><label>Reference_No</label><input name="ref" required></div>
+    <div class="field"><label>Part_No</label><input name="part_no" required></div>
+
+</div>
+
+<!-- BOTTOM ROW -->
+<div class="bottom-row">
+    <div class="field">
+        <label>Part_Description</label>
+        <input name="part_desc" required>
+    </div>
+
+    <div class="field">
+        <label>Description</label>
+        <textarea name="desc" required></textarea>
+    </div>
+
+    <div class="field">
+        <label>Remarks</label>
+        <textarea name="remarks" required></textarea>
+    </div>
+
+    <div class="field">
+        <label>&nbsp;</label>
+        <button type="submit">Submit</button>
+    </div>
+</div>
+
+</form>
+
+</div>
+</div>
+
+<script>
+let today = new Date().toISOString().split('T')[0];
+document.getElementById("startDate").value = today;
+
+let now = new Date();
+let lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0)
+    .toISOString().split('T')[0];
+document.getElementById("endDate").value = lastDay;
+</script>
+
+</body>
+</html>
