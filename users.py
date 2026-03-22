@@ -1,13 +1,13 @@
 users = {
     "admin": "admin123",
-    "Skillcheck1": "pass1",
-    "Skillcheck2": "pass2",
-    "Skillcheck3": "pass3",
-    "Skillcheck4": "pass4",
-    "Skillcheck5": "pass5",
-    "Skillcheck6": "pass6",
-    "Skillcheck7": "pass7",
-    "Skillcheck8": "pass8",
-    "Skillcheck9": "pass9",
-    "Skillcheck10": "pass10"
+    "Skillcheck1": "SCH123",
+    "Skillcheck2": "SCH123",
+    "Skillcheck3": "SCH123",
+    "Skillcheck4": "SCH123",
+    "Skillcheck5": "SCH123",
+    "Skillcheck6": "SCH123",
+    "Skillcheck7": "SCH123",
+    "Skillcheck8": "SCH123",
+    "Skillcheck9": "SCH123",
+    "Skillcheck10": "SCH123"
 }
